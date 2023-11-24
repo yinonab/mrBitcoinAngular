@@ -4,6 +4,8 @@ import { ContactService } from '../../services/contact.service';
 import { Contact } from '../../models/contact.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap, map, filter, Subject, takeUntil } from 'rxjs';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms'; 
+
 
 @Component({
   selector: 'app-contact-edit-page',
@@ -11,38 +13,60 @@ import { switchMap, map, filter, Subject, takeUntil } from 'rxjs';
   styleUrl: './contact-edit-page.component.scss'
 })
 export class ContactEditPageComponent implements OnInit, OnDestroy {
+  contactForm!: FormGroup;
+  private contactId: string = '';
   private contactService = inject(ContactService)
   private router = inject(Router)
   private route = inject(ActivatedRoute)
-  contact = this.contactService.getEmptyContact()
+  private formBuilder= inject (FormBuilder )
+  // contact = this.contactService.getEmptyContact()
 
   destroySubject = new Subject<void>()
+  constructor(
+   
+    
+  ) {}
 
 
 
   ngOnInit(): void {
+    this.contactForm = this.formBuilder.group({
+      name: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      phone: ['', Validators.required],
+    });
+
+
     this.route.params.pipe(
       takeUntil(this.destroySubject),
-      map(params => params['id']),
+      map(params => {
+        console.log('Received ID:', params['id']);
+        this.contactId = params['id']; // Store the received ID
+        return params['id'];
+      }),
       filter(id => id),
       switchMap(id => this.contactService.getContactById(id))
-    ).subscribe(contact => this.contact = contact)
+    ).subscribe((contact) => {
+      console.log('contact:', contact)
+      this.contactForm.patchValue(contact); 
+    });
+    
   }
   ngOnDestroy(): void {
     this.destroySubject.next()
   }
   onSaveContact() {
-    this.contactService.saveContact(this.contact as Contact)
-      .pipe(takeUntil(this.destroySubject),)
-      .subscribe({
+    if (this.contactForm.valid) {
+      const updatedContact: Contact = { ...this.contactForm.value, _id: this.contactId }; // Include the stored ID
+      console.log('updatedContact:', updatedContact)
+      this.contactService.saveContact(updatedContact).subscribe({
         next: this.onBack,
-        error: err => console.log('err:', err)
-
-      })
+        error: (err) => console.log('err:', err),
+      });
+    }
   }
+
   onBack = () => {
-
-    this.router.navigateByUrl('contact')
-  }
-
+    this.router.navigateByUrl('contact');
+  };
 }
