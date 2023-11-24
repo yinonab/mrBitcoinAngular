@@ -1,0 +1,28 @@
+.user-filter {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    input[type="text"] {
+      padding: 8px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      outline: none;
+      width: 350px;
+      height: 30px;
+      border: black 2px solid;
+      // background-color: #b6eeb7;
+  
+      &::placeholder {
+        color: #999;
+      }
+  
+      &:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+      }
+    }
+  }
+  

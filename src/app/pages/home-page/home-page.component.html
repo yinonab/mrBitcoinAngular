@@ -1,0 +1,19 @@
+<!-- home-page.component.html -->
+
+
+<!-- Displaying user coins and Bitcoin rate -->
+<main *ngIf="user$|async as user" class="container">
+  <div class="info" *ngIf="coins !== null && rate !== null">
+    <p><b>Hello : {{ user.name }} !</b></p>
+    <div class="coin">
+      <img src="../../../assets/imgs/coins.png" alt="">
+      <p><b>{{ user.name }} Coins : </b>{{ coins }}</p>
+    </div>
+    <div class="coin">
+      <img src="../../../assets/imgs/bitcoin.png" alt="">
+      <p><b>Bitcoin Rate : </b> {{ rate }}</p>
+    </div>
+  </div>
+  <!-- <app-contact-page></app-contact-page> -->
+  <!-- <app-statistic-page></app-statistic-page> -->
+</main>

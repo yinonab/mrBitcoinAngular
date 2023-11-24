@@ -1,0 +1,28 @@
+<!-- 
+<ng-container *ngIf="selectedContact; else contactList">
+  Display details of the selected contact
+  <app-contact-details-page (unsSelectedContact)="goBackToList($event)" [selectedContact]="selectedContact"></app-contact-details-page>
+</ng-container>
+
+<ng-template #contactList>
+  Show the list of contacts
+  <app-contact-filter></app-contact-filter>
+  <app-contact-preview 
+    (select)="onSelectContact($event)"
+    *ngFor="let contact of contacts; trackBy: trackByFn"
+    
+    [contact]="contact"
+  ></app-contact-preview>
+</ng-template>
+ -->
+ <!-- <ng-template #contactList> -->
+  <!-- Show the list of contacts -->
+  <section class="pet-list">
+  
+  <app-contact-preview 
+  (remove)="onRemoveContact($event)"
+    *ngFor="let contact of contacts; trackBy: trackByFn"
+    [contact]="contact"
+  ></app-contact-preview>
+</section>
+<!-- </ng-template> -->
