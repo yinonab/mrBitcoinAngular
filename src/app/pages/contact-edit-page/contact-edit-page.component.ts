@@ -31,10 +31,11 @@ export class ContactEditPageComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.contactForm = this.formBuilder.group({
-      name: ['', Validators.required],
+      name: ['', [Validators.required, Validators.minLength(2)]], // Validators should be in an array
       email: ['', [Validators.required, Validators.email]],
-      phone: ['', Validators.required],
+      phone: ['', [Validators.required, Validators.pattern('^\\d{9,10}$')]], // Validators in an array
     });
+    
 
 
     this.route.params.pipe(
