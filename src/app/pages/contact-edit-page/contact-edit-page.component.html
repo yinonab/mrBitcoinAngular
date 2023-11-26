@@ -3,12 +3,21 @@
     <form [formGroup]="contactForm" (ngSubmit)="onSaveContact()">
       <label for="name">Name</label>
       <input formControlName="name" type="text" id="name">
+      <div *ngIf="contactForm.get('name')?.invalid && contactForm.get('name')?.touched">
+        <p class="error-message">Name must be at least 2 characters long.</p>
+      </div>
   
       <label for="email">Email</label>
       <input formControlName="email" type="text" id="email">
+      <div *ngIf="contactForm.get('phone')?.invalid && contactForm.get('phone')?.touched">
+        <p class="error-message">Please enter a valid emil address.</p>
+      </div>
   
       <label for="phone">Phone</label>
       <input formControlName="phone" type="text" id="phone">
+      <div *ngIf="contactForm.get('phone')?.invalid && contactForm.get('phone')?.touched">
+        <p class="error-message">Please enter a valid phone number.</p>
+      </div>
   
       <button type="submit" [disabled]="!contactForm.valid">Save</button>
     </form>
