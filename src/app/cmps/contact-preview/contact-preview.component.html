@@ -1,7 +1,6 @@
 <section class="contact-preview">
     <section class="info">
         <a [routerLink]="['/details',contact._id]" class="data">
-            <img class="photo" src="https://robohash.org/{{contact._id}}?set=set8" alt="">
             <p><b> Name : </b>{{contact.name}}</p>
         </a>
         <section class="actions" >
@@ -9,6 +8,7 @@
             <a  [routerLink]="['/contact/edit',contact._id]"><button class="edit-btn">📝</button></a>
         </section>
         
-
+        
     </section>
+    <img class="photo" src="https://robohash.org/{{contact._id}}?set=set8" alt="">
 </section>
