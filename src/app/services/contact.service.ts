@@ -31,7 +31,7 @@ export class ContactService {
             .pipe(
                 tap(contacts => {
                     const filterBy = this._filterBy$.value
-                    console.log('filterBy:', filterBy)
+                    // console.log('filterBy:', filterBy)
                     if (filterBy && filterBy.term) {
                         contacts = this._filter(contacts, filterBy.term)
                     }

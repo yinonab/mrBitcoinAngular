@@ -9,7 +9,7 @@
   
       <label for="email">Email</label>
       <input formControlName="email" type="text" id="email">
-      <div *ngIf="contactForm.get('phone')?.invalid && contactForm.get('phone')?.touched">
+      <div *ngIf="contactForm.get('email')?.invalid && contactForm.get('email')?.touched">
         <p class="error-message">Please enter a valid emil address.</p>
       </div>
   

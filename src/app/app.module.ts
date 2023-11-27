@@ -15,6 +15,7 @@ import { FormsModule } from '@angular/forms';
 import { StatisticPageComponent } from './pages/statistic-page/statistic-page.component';
 import { AppHeaderComponent } from './cmps/app-header/app-header.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { SignupComponent } from './pages/signup/signup.component';
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     HomePageComponent,
     StatisticPageComponent,
     AppHeaderComponent,
+    SignupComponent,
   ],
   imports: [
     BrowserModule,

@@ -3,6 +3,7 @@ import { UserService } from '../../services/user.service';
 import { User } from '../../models/user';
 import { BitcoinService } from '../../services/bitcoin.service';
 import { Subscription, Observable, switchMap, map } from 'rxjs'
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -16,6 +17,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
   user$: Observable<User> | null = null;
   coins: number = 0
   rate: string = ''
+  private route = inject(ActivatedRoute)
   ngOnInit(): void {
 
     this.getUserCoins()
@@ -33,10 +35,13 @@ export class HomePageComponent implements OnInit, OnDestroy {
   // }
 
   async getUserCoins(): Promise<void> {
-    this.user$ = this.userService.getById('125'); // Assign observable to user$
-    this.user$.subscribe((user: User) => {
-      this.coins = user.coins; // Access 'coins' after the user object is emitted
-      this.setRateCoins();
+    this.route.params.subscribe(params => {
+      const userId = params['id']; // Fetch 'id' from the route params
+      this.user$ = this.userService.getById(userId); // Assign observable to user$
+      this.user$.subscribe((user: User) => {
+        this.coins = user.coins; // Access 'coins' after the user object is emitted
+        this.setRateCoins();
+      });
     });
   }
 

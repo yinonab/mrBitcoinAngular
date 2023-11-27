@@ -9,10 +9,21 @@ header {
     margin-bottom: 30px;
     font-size: 1.2em;
 
-    h1.logo {
+    .logo {
         flex-grow: 1;
-        font-size: 40px;
-        margin: 20px;
+        
+        a{
+            text-decoration: none;
+
+        }
+        &:hover{
+            text-decoration: none;
+        }
+        h1{
+            font-size: 40px;
+            margin: 20px;
+            color: whitesmoke;
+        }
     }
 
     nav {

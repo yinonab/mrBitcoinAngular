@@ -42,7 +42,7 @@ export class ContactEditPageComponent implements OnInit, OnDestroy {
       takeUntil(this.destroySubject),
       map(params => {
         console.log('Received ID:', params['id']);
-        this.contactId = params['id']; // Store the received ID
+        this.contactId = params['id']
         return params['id'];
       }),
       filter(id => id),
@@ -58,7 +58,7 @@ export class ContactEditPageComponent implements OnInit, OnDestroy {
   }
   onSaveContact() {
     if (this.contactForm.valid) {
-      const updatedContact: Contact = { ...this.contactForm.value, _id: this.contactId }; // Include the stored ID
+      const updatedContact: Contact = { ...this.contactForm.value, _id: this.contactId }
       console.log('updatedContact:', updatedContact)
       this.contactService.saveContact(updatedContact).subscribe({
         next: this.onBack,
