@@ -5,8 +5,10 @@
         </a>
     </div>
     <nav>
-        <div>
-            <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}"><img class="home" src="../../../assets/imgs/home.png" alt=""></a>
+        <div >
+            <a [routerLink]="['/home', userId]" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+                <img class="home" src="../../../assets/imgs/home.png" alt="">
+            </a>            
             <a routerLink="/contact" routerLinkActive="active"><img class="home" src="../../../assets/imgs/users.png" alt=""></a>
             <a routerLink="/statistics" routerLinkActive="active"><img class="home" src="../../../assets/imgs/increase.png" alt=""></a>
             <a routerLink="/signup" routerLinkActive="active">SignUp</a>

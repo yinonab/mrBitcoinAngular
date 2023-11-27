@@ -8,6 +8,7 @@ import { catchError, retry, tap, map, take } from 'rxjs/operators';
 
 
 const ENTITY = 'users'
+const LOGGED_IN_USER_KEY = 'loggedInUser';
 
 
 @Injectable({
@@ -22,7 +23,10 @@ export class UserService {
       localStorage.setItem(ENTITY, JSON.stringify(this._createUsers()))
     }
   }
+
   private loggedInUser: User | null = null;
+  private loggedInUserSubject = new BehaviorSubject<User | null>(null);
+  loggedInUser$ = this.loggedInUserSubject.asObservable();
   private _users$ = new BehaviorSubject<User[]>([]);
   public users$ = this._users$.asObservable()
   private _filterBy$ = new BehaviorSubject<UserFilter>({ term: '' });
@@ -120,12 +124,15 @@ export class UserService {
     console.log('err:', err)
     return throwError(() => err)
   }
-  public getLoggedInUser(): User | null {
-    return this.loggedInUser;
+  public saveLoggedInUser(user: User): void {
+    localStorage.setItem(LOGGED_IN_USER_KEY, JSON.stringify(user));
+    this.loggedInUserSubject.next(user);
   }
 
-  public setLoggedInUser(user: User): void {
-    this.loggedInUser = user;
+  public getLoggedInUserFromStorage(): User | null {
+    const userJSON = localStorage.getItem(LOGGED_IN_USER_KEY);
+    return userJSON ? JSON.parse(userJSON) as User : null;
   }
 }
+
 
