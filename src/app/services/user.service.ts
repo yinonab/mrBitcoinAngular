@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { User, UserFilter } from '../models/user';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { BehaviorSubject, from, Observable, throwError } from 'rxjs';
+import { BehaviorSubject,of, from, Observable, throwError } from 'rxjs';
 import { storageService } from './async-storage.service';
 import { catchError, retry, tap, map, take } from 'rxjs/operators';
 
 
 
 const ENTITY = 'users'
+const LOGGED_IN_USER_KEY = 'loggedInUser';
 
 
 @Injectable({
@@ -22,6 +23,10 @@ export class UserService {
       localStorage.setItem(ENTITY, JSON.stringify(this._createUsers()))
     }
   }
+
+  // private loggedInUser: User | null = null;
+  private loggedInUserSubject = new BehaviorSubject<User | null>(this.getLoggedInUserFromStorage());
+  loggedInUser$ = this.loggedInUserSubject.asObservable();
   private _users$ = new BehaviorSubject<User[]>([]);
   public users$ = this._users$.asObservable()
   private _filterBy$ = new BehaviorSubject<UserFilter>({ term: '' });
@@ -33,7 +38,7 @@ export class UserService {
       .pipe(
         tap(users => {
           const filterBy = this._filterBy$.value
-          console.log('filterBy:', filterBy)
+          // console.log('filterBy:', filterBy)
           users = users.filter(user => user.name.toLowerCase().includes(filterBy.term.toLowerCase()))
           this._users$.next(users)
 
@@ -49,6 +54,50 @@ export class UserService {
         catchError(this._handleError)
       )
 
+  }
+  getByName(userName: string): Observable<User | string> {
+    console.log('userName:', userName);
+    return from(storageService.get<User>(ENTITY, userName)).pipe(
+      map(user => user || 'User not found'),
+      catchError(error => {
+        console.error('Error fetching user:', error);
+        return of('Error fetching user');
+      })
+    );
+  }
+  public save(user: User) {
+    console.log('user:', user)
+    return user._id ? this._updateUser(user) : this._addUser(user)
+}
+private _updateUser(user: User) {
+  return from(storageService.put<User>(ENTITY, user))
+      .pipe(
+          tap(updatedUser => {
+              const users = this._users$.value
+              this._users$.next(users.map(user => user._id === updatedUser._id ? updatedUser : user))
+          }),
+          retry(1),
+          catchError(this._handleError)
+      )
+}
+  
+  public saveUser(name: string) {
+    console.log('name:', name);
+    let user: Partial<User> = {
+      name,
+      coins: 100,
+      moves: []
+    };
+    return this._addUser(user as User);
+  }
+  
+  private _addUser(user: User) {
+    console.log('user:', user);
+    return from(storageService.post(ENTITY, user)).pipe(
+      take(1),
+      retry(1),
+      catchError(this._handleError)
+    );
   }
   public setFilterBy(filterBy: UserFilter) {
     this._filterBy$.next(filterBy)
@@ -90,4 +139,15 @@ export class UserService {
     console.log('err:', err)
     return throwError(() => err)
   }
+  public saveLoggedInUser(user: User): void {
+    localStorage.setItem(LOGGED_IN_USER_KEY, JSON.stringify(user));
+    this.loggedInUserSubject.next(user);
+  }
+
+  public getLoggedInUserFromStorage(): User | null {
+    const userJSON = localStorage.getItem(LOGGED_IN_USER_KEY);
+    return userJSON ? JSON.parse(userJSON) as User : null;
+  }
 }
+
+

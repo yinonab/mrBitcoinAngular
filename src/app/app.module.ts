@@ -15,6 +15,10 @@ import { FormsModule } from '@angular/forms';
 import { StatisticPageComponent } from './pages/statistic-page/statistic-page.component';
 import { AppHeaderComponent } from './cmps/app-header/app-header.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { SignupComponent } from './pages/signup/signup.component';
+import { TransferFundComponent } from './pages/transfer-fund/transfer-fund.component';
+import { MovesListComponent } from './cmps/moves-list/moves-list.component';
+import { ClickOutsideDirective } from './click-outside.directive';
 
 
 @NgModule({
@@ -29,6 +33,10 @@ import { ReactiveFormsModule } from '@angular/forms';
     HomePageComponent,
     StatisticPageComponent,
     AppHeaderComponent,
+    SignupComponent,
+    TransferFundComponent,
+    MovesListComponent,
+    ClickOutsideDirective,
   ],
   imports: [
     BrowserModule,

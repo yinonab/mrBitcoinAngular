@@ -9,18 +9,26 @@ export const storageService = {
 interface EntityId {
     _id: string
 }
+interface EntityName {
+    name: string
+}
 
 function query<T>(entityType: string, delay = 200): Promise<T[]> {
     var entities = JSON.parse(localStorage.getItem(entityType) as string) || []
     return new Promise(resolve => setTimeout(() => resolve(entities), delay))
 }
 
-async function get<T extends EntityId>(entityType: string, entityId: string): Promise<T> {
-    const entities = await query<T>(entityType)
-    const entity = entities.find(entity => entity._id === entityId)
-    if (!entity) throw new Error(`Cannot get, Item ${entityId} of type: ${entityType} does not exist`)
-    return entity;
+async function get<T extends EntityId | EntityName>(entityType: string, key: string): Promise<T> {
+    const entities = await query<T>(entityType);
+    const entityById = entities.find(entity => (entity as EntityId)._id === key);
+    const entityByName = entities.find(entity => (entity as EntityName).name === key);
+
+    if (entityById) return entityById;
+    if (entityByName) return entityByName;
+
+    throw new Error(`Cannot get, Item ${key} of type: ${entityType} does not exist`);
 }
+
 
 async function post<T extends EntityId>(entityType: string, newEntity: T): Promise<T> {
     newEntity = JSON.parse(JSON.stringify(newEntity))

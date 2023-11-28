@@ -8,15 +8,27 @@ header {
     color: whitesmoke;
     margin-bottom: 30px;
     font-size: 1.2em;
+    padding: 15px;
 
-    h1.logo {
+    .logo {
         flex-grow: 1;
-        font-size: 40px;
-        margin: 20px;
+        
+        a{
+            text-decoration: none;
+
+        }
+        &:hover{
+            text-decoration: none;
+        }
+        h1{
+            font-size: 40px;
+            // margin: 20px;
+            color: whitesmoke;
+        }
     }
 
     nav {
-        margin-left: 20px;
+        // margin-left: 20px;
         a {
             font-size: 20px;
             text-decoration: none;
@@ -37,4 +49,5 @@ header {
 .home{
     height: 2em;
     width: 2em;
+    gap: 5px;
 }

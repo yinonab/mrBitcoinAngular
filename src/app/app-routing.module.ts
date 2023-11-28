@@ -5,6 +5,8 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
 import { StatisticPageComponent } from './pages/statistic-page/statistic-page.component';
 import { ContactDetailsPageComponent } from './pages/contact-details-page/contact-details-page.component';
 import { ContactEditPageComponent } from './pages/contact-edit-page/contact-edit-page.component';
+import { SignupComponent } from './pages/signup/signup.component'
+import { TransferFundComponent } from './pages/transfer-fund/transfer-fund.component';
 
 const routes: Routes = [
   {path:'details/:id',component:ContactDetailsPageComponent},
@@ -12,12 +14,15 @@ const routes: Routes = [
     path: 'contact',
     component: ContactPageComponent,
     children: [
+      { path: 'transfer/:id', component: TransferFundComponent },
       { path: 'edit/:id', component: ContactEditPageComponent },
       { path: 'edit', component: ContactEditPageComponent }
     ]
   },
   {path:'statistics',component:StatisticPageComponent},
-  {path:'',component:HomePageComponent}
+  
+  {path:'signup',component:SignupComponent},
+  {path:'home/:id',component:HomePageComponent},
 ];
 
 @NgModule({

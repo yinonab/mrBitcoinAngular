@@ -54,7 +54,7 @@
                 }
 
                 &:hover {
-                    background-color: orangered;
+                    background-color: #4caf50;
                     color: white;
                 }
             }
@@ -75,10 +75,33 @@
                 
 
                 &:hover {
-                    background-color: orangered;
+                    background-color: #4caf50;
                     color: white;
                 }
                 
+            }
+            .transfer-btn{
+                width: 2.4em;
+                height: 2.4em;
+                font-size: medium;
+                align-items: end;
+                background-color: inherit;
+                border-radius: 100%;
+                border: 1px solid black;
+                transition: 0.15s;
+                cursor: pointer;
+                .del{
+                    margin-top: 8px;
+                    margin-left: 7px;
+                    width: 1.5em;
+                    height: 1.5em;
+                }
+                
+
+                &:hover {
+                    background-color: #4caf50;
+                    color: white;
+                }
             }
         }
     }

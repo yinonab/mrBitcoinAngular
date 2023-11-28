@@ -1,8 +1,9 @@
 import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { UserService } from '../../services/user.service';
-import { User } from '../../models/user';
+import { Transactions, User } from '../../models/user';
 import { BitcoinService } from '../../services/bitcoin.service';
 import { Subscription, Observable, switchMap, map } from 'rxjs'
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -16,15 +17,25 @@ export class HomePageComponent implements OnInit, OnDestroy {
   user$: Observable<User> | null = null;
   coins: number = 0
   rate: string = ''
+  private route = inject(ActivatedRoute)
+  userMoves: Transactions[] = []
+  user = this.userService.getLoggedInUserFromStorage()
+
+
   ngOnInit(): void {
 
     this.getUserCoins()
-
+    this.getUserMoves()
+    console.log('this.userMoves:', this.userMoves)
 
   }
 
   ngOnDestroy(): void {
 
+  }
+  getUserMoves() {
+
+    this.userMoves = this.user!.moves.slice(0, 3)
   }
   // async ngOnInit(): Promise<void> {
   //   this.contact$ = this.route.params.pipe(
@@ -33,10 +44,13 @@ export class HomePageComponent implements OnInit, OnDestroy {
   // }
 
   async getUserCoins(): Promise<void> {
-    this.user$ = this.userService.getById('125'); // Assign observable to user$
-    this.user$.subscribe((user: User) => {
-      this.coins = user.coins; // Access 'coins' after the user object is emitted
-      this.setRateCoins();
+    this.route.params.subscribe(params => {
+      const userId = params['id']; // Fetch 'id' from the route params
+      this.user$ = this.userService.getById(userId); // Assign observable to user$
+      this.user$.subscribe((user: User) => {
+        this.coins = user.coins; // Access 'coins' after the user object is emitted
+        this.setRateCoins();
+      });
     });
   }
 
