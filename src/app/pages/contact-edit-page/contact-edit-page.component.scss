@@ -36,3 +36,16 @@
         }
     }
 }
+@media (max-width: 600px) {
+    .contact-edit {
+        form{
+            input{
+                width: 15em;
+            }
+        }
+        p {
+            font-size: 1.5em;
+        }
+    }
+
+}

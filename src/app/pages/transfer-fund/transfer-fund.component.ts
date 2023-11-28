@@ -55,7 +55,7 @@ export class TransferFundComponent implements OnInit, OnDestroy {
     });
   }
   onSubmit() {
-    if (this.contactForm.valid) {
+    if (this.contactForm.valid && this.user!.coins>0) {
       const transactions: Transactions = {
         toId: this.contact._id,
         from: this.user!.name,
@@ -104,11 +104,24 @@ export class TransferFundComponent implements OnInit, OnDestroy {
       }
       
     }
+    else{this.onFailed()
+
+    }
   }
   onBack = () => {
     if (!this.isMsg) {
       this.isMsg = true;
-      this.msg = 'Transaction Done !!!!';
+      this.msg = 'Transaction Done';
+      setTimeout(() => {
+        this.isMsg = false;
+        this.router.navigateByUrl('contact');
+      }, 2000);
+    }
+  };
+  onFailed = () => {
+    if (!this.isMsg) {
+      this.isMsg = true;
+      this.msg = 'Transaction Failed';
       setTimeout(() => {
         this.isMsg = false;
         this.router.navigateByUrl('contact');

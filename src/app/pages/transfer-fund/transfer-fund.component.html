@@ -16,5 +16,5 @@
         <input formControlName="coins" type="text" id="coins">
         <button type="submit" [disabled]="!contactForm.valid">Save</button>
       </form>
-      <h1 class="msg" *ngIf="isMsg">{{msg}}</h1>
+      <p class="msg" *ngIf="isMsg">{{msg}}<p>
     </section>

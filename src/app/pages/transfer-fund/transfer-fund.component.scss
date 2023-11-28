@@ -17,15 +17,22 @@
     form {
         display: flex;
         flex-direction: column;
+
         label {
             margin-top: 1em;
         }
+
+        input {
+            margin-top: 10px;
+        }
+
+
         .error-message {
             color: red;
             font-size: 0.8em;
             margin-top: 0.5em;
-          }
-      
+        }
+
 
         button {
             width: 50%;
@@ -34,7 +41,22 @@
         }
     }
 }
-.msg{
+
+.msg {
     color: red;
     font-size: 50px;
+}
+
+@media (max-width: 600px) {
+    .transfer {
+        form{
+            input{
+                width: 15em;
+            }
+        }
+        p {
+            font-size: 1.5em;
+        }
+    }
+
 }
