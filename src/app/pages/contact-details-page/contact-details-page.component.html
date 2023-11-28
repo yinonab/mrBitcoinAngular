@@ -5,9 +5,9 @@
     <p><b>Phone : </b>{{ contact!.phone }}</p>
     <p><b>Email : </b>{{ contact!.email }}</p>
     <p><b>Coins : </b>{{ contact!.coins }}</p>
-    <button class="btn" (click)="goBackToList()">Back to Contacts</button>
+    <button class="btn" (click)="goBackToList()">Back</button>
     <div *ngIf="contactMoves!.length > 0">
-      <h3><b>Your Moves :</b> </h3>
+      <p><b>Your Moves :</b> </p>
       <app-moves-list  *ngFor="let move of contactMoves"
       [move]="move">
        

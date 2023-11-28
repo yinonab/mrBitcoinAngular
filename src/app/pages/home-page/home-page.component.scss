@@ -1,43 +1,56 @@
 /* Styles for the home page */
 
-.info{
+.info {
   border: 1px solid rgb(138, 132, 132);
   padding: 25px;
-}
-.coin {
   display: flex;
-  align-items: center;
 
-  img {
-    height: 2em;
-    width: 2em;
+  img.photo {
+    height: 15em;
+    width: 15em;
   }
-}
 
-p {
-  font-size: 20px;
-  margin-left: 10px;
-  font-size: 18px;
-  color: #333;
+  p {
+    margin: 10px;
+    font-size: 2rem;
+    margin-left: 10px;
+    color: #333;
+  }
+
+  .coin {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-end;
+
+    .user-coin,
+    .user-rate {
+      display: flex;
+      align-items: center;
+
+      img {
+        height: 2em;
+        width: 2em;
+      }
+    }
+  }
 }
 
 .container {
   display: flex;
   flex-direction: column;
-  // align-items: center;
   justify-content: center;
+  align-items: center;
   margin-top: 20px;
 
   &>* {
     margin-bottom: 20px;
   }
-  .photo {
-    height: 5em;
-    width: 5em;
-  }
+
+
 }
 
-/* Styles for app-contact-page and app-statistic-page components (assuming these are custom components) */
+/* Styles for app-contact-page and app-statistic-page components */
 app-contact-page,
 app-statistic-page {
   width: 100%;
@@ -56,7 +69,29 @@ app-statistic-page {
 
   /* Add more specific styles for elements inside these components if needed */
 }
-li{
+
+li {
   padding: 25px;
   border: 1px solid black;
-list-style: none;}
+  list-style: none;
+}
+
+@media (max-width: 600px) {
+  
+      .info {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        .photo{
+          margin-left: 2.2em;
+          margin-bottom: 3em;
+        }.coin{
+          margin-left: 2.5em;
+          .hllow{
+            margin-left: 1.22em;
+          }
+        }
+
+      }
+  
+}

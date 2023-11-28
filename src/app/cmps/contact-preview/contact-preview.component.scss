@@ -117,3 +117,14 @@
     width: 80px;
     height: 80px;
 }
+@media (max-width: 600px) {
+    .contact-preview {
+        .info {
+            .actions {
+                opacity: 1;
+                transform: translateX(0);
+            }
+
+        }
+    }
+}

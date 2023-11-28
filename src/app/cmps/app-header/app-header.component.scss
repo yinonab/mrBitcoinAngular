@@ -11,16 +11,18 @@ header {
     padding: 15px;
 
     .logo {
-        flex-grow: 1;
-        
-        a{
+        flex-grow: 0;
+
+        a {
             text-decoration: none;
 
         }
-        &:hover{
+
+        &:hover {
             text-decoration: none;
         }
-        h1{
+
+        h1 {
             font-size: 40px;
             // margin: 20px;
             color: whitesmoke;
@@ -28,7 +30,10 @@ header {
     }
 
     nav {
-        // margin-left: 20px;
+        .nav-container{
+            display: flex;
+        }
+
         a {
             font-size: 20px;
             text-decoration: none;
@@ -46,7 +51,8 @@ header {
         }
     }
 }
-.home{
+
+.home {
     height: 2em;
     width: 2em;
     gap: 5px;

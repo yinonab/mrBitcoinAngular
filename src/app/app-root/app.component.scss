@@ -1,0 +1,21 @@
+.main-app {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+
+
+
+    main.container {
+        flex-grow: 1;
+        margin:  10px 0;
+    }
+
+    footer {
+        height: 80px;
+        display: flex;
+        align-items: center;
+        color: whitesmoke;
+        background-color: #4caf50;;
+        font-size: 1.2em;
+    }
+}

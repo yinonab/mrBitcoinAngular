@@ -1,23 +1,33 @@
 <main *ngIf="user$ | async as user" class="container">
   <div class="info" *ngIf="user.coins !== null && rate !== null">
-    <img class="photo" src="https://robohash.org/{{user!._id}}?set=set8" alt="">
-    <p><b>Hello: {{ user.name }}!</b></p>
+    <div class="photo-container">
 
-    <div class="coin">
-      <img src="../../../assets/imgs/coins.png" alt="">
-      <p><b>{{ user.name }} Coins:</b> {{ user.coins }}</p>
+      <img class="photo" src="https://robohash.org/{{user!._id}}?set=set8" alt="">
     </div>
+
+    <!-- <div class="coin">
+      
+    </div> -->
     <div class="coin">
-      <img src="../../../assets/imgs/bitcoin.png" alt="">
-      <p><b>Bitcoin Rate:</b> {{ rate }}</p>
+      <p class="hllow"><b>Hello: {{ user.name }}!</b></p>
+      <div class="user-coin">
+        <br><br>
+
+        <img src="../../../assets/imgs/coins.png" alt="">
+        <p><b>{{ user.name }} Coins:</b> {{ user.coins }}</p>
+      </div>
+      <div class="user-rate">
+        <img src="../../../assets/imgs/bitcoin.png" alt="">
+        <p><b>Bitcoin Rate:</b> {{ rate }}</p>
+      </div>
+
     </div>
   </div>
 
   <div *ngIf="user.moves.length > 0">
-    <h3><b>Your Moves :</b> </h3>
-    <app-moves-list  *ngFor="let move of userMoves"
-    [move]="move">
-     
+    <h1><b>Your Moves :</b> </h1>
+    <app-moves-list *ngFor="let move of userMoves" [move]="move">
+
     </app-moves-list>
   </div>
 </main>
