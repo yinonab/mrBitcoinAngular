@@ -1,10 +1,10 @@
 <main class="container">
   <section *ngIf="contact$|async as contact" class="info">
     <img class="photo" src="https://robohash.org/{{contact!._id}}?set=set8" alt="">
-    <p><b>Name : </b>{{ contact!.name }}</p>
-    <p><b>Phone : </b>{{ contact!.phone }}</p>
-    <p><b>Email : </b>{{ contact!.email }}</p>
-    <p><b>Coins : </b>{{ contact!.coins }}</p>
+    <p><b>Name : </b><br>{{ contact!.name }}</p>
+    <p><b>Phone : </b><br>{{ contact!.phone }}</p>
+    <p><b>Email : </b><br>{{ contact!.email }}</p>
+    <p><b>Coins : </b><br>{{ contact!.coins }}</p>
     <button class="btn" (click)="goBackToList()">Back</button>
     <div *ngIf="contactMoves!.length > 0">
       <p><b>Your Moves :</b> </p>
