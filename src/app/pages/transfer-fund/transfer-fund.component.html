@@ -1,0 +1,20 @@
+<!-- <section class="transfer">
+    <form (ngSubmit)="onTransferCoin(transferAmount)">
+        <h1>Transfer Coins</h1>
+        <h2>To: {{contact.name}}</h2>
+        <h2>Your current balance is: {{user?.coins}}</h2>
+        <label for="transfer">Transfer amount</label>
+        <input [(ngModel)]="transferAmount"  name="transfer" id="transfer" type="number" placeholder="Enter number">
+        <button>Transfer coins</button>
+    </form>
+</section> -->
+<section class="transfer">
+    <img src="../../../assets/imgs/bitcoin.png" alt="">
+    <h2><b> Transfer to :</b>{{contact.name}} </h2>
+    <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+        <label for="coins">Coins</label>
+        <input formControlName="coins" type="text" id="coins">
+        <button type="submit" [disabled]="!contactForm.valid">Save</button>
+      </form>
+      <h1 class="msg" *ngIf="isMsg">{{msg}}</h1>
+    </section>

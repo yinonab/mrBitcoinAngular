@@ -1,7 +1,7 @@
 /* Styles for the home page */
 
 .info{
-  border: 1px solid black;
+  border: 1px solid rgb(138, 132, 132);
   padding: 25px;
 }
 .coin {
@@ -24,12 +24,16 @@ p {
 .container {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  // align-items: center;
   justify-content: center;
   margin-top: 20px;
 
   &>* {
     margin-bottom: 20px;
+  }
+  .photo {
+    height: 5em;
+    width: 5em;
   }
 }
 
@@ -52,3 +56,7 @@ app-statistic-page {
 
   /* Add more specific styles for elements inside these components if needed */
 }
+li{
+  padding: 25px;
+  border: 1px solid black;
+list-style: none;}

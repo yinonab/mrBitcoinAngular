@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { UserService } from '../../services/user.service';
-import { User } from '../../models/user';
+import { Transactions, User } from '../../models/user';
 import { BitcoinService } from '../../services/bitcoin.service';
 import { Subscription, Observable, switchMap, map } from 'rxjs'
 import { ActivatedRoute } from '@angular/router';
@@ -18,15 +18,24 @@ export class HomePageComponent implements OnInit, OnDestroy {
   coins: number = 0
   rate: string = ''
   private route = inject(ActivatedRoute)
+  userMoves: Transactions[] = []
+  user = this.userService.getLoggedInUserFromStorage()
+
+
   ngOnInit(): void {
 
     this.getUserCoins()
-
+    this.getUserMoves()
+    console.log('this.userMoves:', this.userMoves)
 
   }
 
   ngOnDestroy(): void {
 
+  }
+  getUserMoves() {
+
+    this.userMoves = this.user!.moves.slice(0, 3)
   }
   // async ngOnInit(): Promise<void> {
   //   this.contact$ = this.route.params.pipe(

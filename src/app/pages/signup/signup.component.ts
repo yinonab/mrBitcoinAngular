@@ -11,7 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class SignupComponent implements OnInit {
   private userService = inject(UserService)
-  user$: Observable<User | string> | null = null;
+  // user$: Observable<User | string> | null = null;
   private router = inject(Router)
   private route = inject(ActivatedRoute)
   userName: string = '';
@@ -28,7 +28,7 @@ export class SignupComponent implements OnInit {
         this.userService.saveUser(name).subscribe((newUser: User | string) => {
           if (typeof newUser !== 'string') {
             const user = newUser as User;
-            this.userService.setLoggedInUser(user);
+            this.userService.saveLoggedInUser(user);
             this.getUserAndNavigate(user._id);
           } else {
             console.log('Error creating user');
@@ -37,7 +37,7 @@ export class SignupComponent implements OnInit {
       } else {
         const user = result as User;
         console.log('User exists:', user);
-        this.userService.setLoggedInUser(user);
+        this.userService.saveLoggedInUser(user);
         this.getUserAndNavigate(user._id); // Navigate if user already exists
       }
     });

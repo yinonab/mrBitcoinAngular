@@ -4,7 +4,15 @@
     <p><b>Name : </b>{{ contact!.name }}</p>
     <p><b>Phone : </b>{{ contact!.phone }}</p>
     <p><b>Email : </b>{{ contact!.email }}</p>
-    <!-- Add more details as needed -->
+    <p><b>Coins : </b>{{ contact!.coins }}</p>
     <button class="btn" (click)="goBackToList()">Back to Contacts</button>
+    <div *ngIf="contactMoves!.length > 0">
+      <h3><b>Your Moves :</b> </h3>
+      <app-moves-list  *ngFor="let move of contactMoves"
+      [move]="move">
+       
+      </app-moves-list>
+    </div>
+    <!-- Add more details as needed -->
   </section>
 </main>
