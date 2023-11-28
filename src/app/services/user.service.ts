@@ -24,8 +24,8 @@ export class UserService {
     }
   }
 
-  private loggedInUser: User | null = null;
-  private loggedInUserSubject = new BehaviorSubject<User | null>(null);
+  // private loggedInUser: User | null = null;
+  private loggedInUserSubject = new BehaviorSubject<User | null>(this.getLoggedInUserFromStorage());
   loggedInUser$ = this.loggedInUserSubject.asObservable();
   private _users$ = new BehaviorSubject<User[]>([]);
   public users$ = this._users$.asObservable()
@@ -65,6 +65,21 @@ export class UserService {
       })
     );
   }
+  public save(user: User) {
+    console.log('user:', user)
+    return user._id ? this._updateUser(user) : this._addUser(user)
+}
+private _updateUser(user: User) {
+  return from(storageService.put<User>(ENTITY, user))
+      .pipe(
+          tap(updatedUser => {
+              const users = this._users$.value
+              this._users$.next(users.map(user => user._id === updatedUser._id ? updatedUser : user))
+          }),
+          retry(1),
+          catchError(this._handleError)
+      )
+}
   
   public saveUser(name: string) {
     console.log('name:', name);

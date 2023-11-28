@@ -11,7 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class SignupComponent implements OnInit {
   private userService = inject(UserService)
-  user$: Observable<User | string> | null = null;
+  // user$: Observable<User | string> | null = null;
   private router = inject(Router)
   private route = inject(ActivatedRoute)
   userName: string = '';
