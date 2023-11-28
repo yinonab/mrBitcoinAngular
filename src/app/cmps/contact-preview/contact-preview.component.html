@@ -5,8 +5,8 @@
         </a>
         <section class="actions" >
             <button (click)="onRemoveContact()" class="remove-btn"><img class="del" src="../../../assets/imgs/delete.png" alt=""></button>
-            <a  [routerLink]="['/contact/edit',contact._id]"><button class="edit-btn">📝</button></a>
-            <a [routerLink]="['transfer', contact._id]" class="transfer-btn"><img class="del" src="../../../assets/imgs/transaction.png" alt=""></a>
+            <a appEvStop [routerLink]="['/contact/edit',contact._id]"><button class="edit-btn">📝</button></a>
+            <a appEvStop [routerLink]="['transfer', contact._id]" class="transfer-btn"><img class="del" src="../../../assets/imgs/transaction.png" alt=""></a>
         </section>
         
         

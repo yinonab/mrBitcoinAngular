@@ -19,6 +19,7 @@ import { SignupComponent } from './pages/signup/signup.component';
 import { TransferFundComponent } from './pages/transfer-fund/transfer-fund.component';
 import { MovesListComponent } from './cmps/moves-list/moves-list.component';
 import { ClickOutsideDirective } from './click-outside.directive';
+import { EvStopDirective } from './ev-stop.directive';
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import { ClickOutsideDirective } from './click-outside.directive';
     TransferFundComponent,
     MovesListComponent,
     ClickOutsideDirective,
+    EvStopDirective,
   ],
   imports: [
     BrowserModule,

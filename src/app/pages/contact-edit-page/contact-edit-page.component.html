@@ -1,4 +1,4 @@
-<section class="contact-edit">
+<section (appClickOutside)="onBack()" class="contact-edit">
     <h2>{{ 'Add' }} Contact</h2>
     <form [formGroup]="contactForm" (ngSubmit)="onSaveContact()">
       <label for="name">Name</label>

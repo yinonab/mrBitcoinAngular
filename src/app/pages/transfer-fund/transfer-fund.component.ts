@@ -115,6 +115,9 @@ export class TransferFundComponent implements OnInit, OnDestroy {
       }, 2000);
     }
   };
+  onClose(){
+    this.router.navigateByUrl('contact');
+  }
   
 
 

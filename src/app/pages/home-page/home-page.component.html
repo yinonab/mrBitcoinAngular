@@ -1,33 +1,32 @@
-<main *ngIf="user$ | async as user" class="container">
-  <div class="info" *ngIf="user.coins !== null && rate !== null">
-    <div class="photo-container">
+<section>
+  <ng-container *ngIf="user$ | async as user; else signup">
+    <main *ngIf="user" class="container">
+      <div class="info" *ngIf="user.coins !== null && rate !== null">
+        <div class="photo-container">
+          <img class="photo" [src]="'https://robohash.org/' + user._id + '?set=set8'" alt="">
+        </div>
 
-      <img class="photo" src="https://robohash.org/{{user!._id}}?set=set8" alt="">
-    </div>
-
-    <!-- <div class="coin">
-      
-    </div> -->
-    <div class="coin">
-      <p class="hllow"><b>Hello: {{ user.name }}!</b></p>
-      <div class="user-coin">
-        <br><br>
-
-        <img src="../../../assets/imgs/coins.png" alt="">
-        <p><b>{{ user.name }} Coins:</b> {{ user.coins }}</p>
+        <div class="coin">
+          <p class="hllow"><b>Hello: {{ user.name }}!</b></p>
+          <div class="user-coin">
+            <br><br>
+            <img src="../../../assets/imgs/coins.png" alt="">
+            <p><b>{{ user.name }} Coins:</b> {{ user.coins }}</p>
+          </div>
+          <div class="user-rate">
+            <img src="../../../assets/imgs/bitcoin.png" alt="">
+            <p><b>Bitcoin Rate:</b> {{ rate }}</p>
+          </div>
+        </div>
       </div>
-      <div class="user-rate">
-        <img src="../../../assets/imgs/bitcoin.png" alt="">
-        <p><b>Bitcoin Rate:</b> {{ rate }}</p>
+
+      <div *ngIf="user.moves && user.moves.length > 0">
+        <h1><b>Your Moves :</b> </h1>
+        <app-moves-list *ngFor="let move of userMoves" [move]="move"></app-moves-list>
       </div>
-
-    </div>
-  </div>
-
-  <div *ngIf="user.moves.length > 0">
-    <h1><b>Your Moves :</b> </h1>
-    <app-moves-list *ngFor="let move of userMoves" [move]="move">
-
-    </app-moves-list>
-  </div>
-</main>
+    </main>
+  </ng-container>
+  <ng-template #signup>
+    <app-signup></app-signup>
+  </ng-template>
+</section>
