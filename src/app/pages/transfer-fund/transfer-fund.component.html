@@ -10,7 +10,7 @@
 </section> -->
 <section (appClickOutside)="onClose()" class="transfer">
     <img src="../../../assets/imgs/bitcoin.png" alt="">
-    <h2><b> Transfer to :</b>{{contact.name}} </h2>
+    <h2><b> Transfer to :</b>{{contact!.name}} </h2>
     <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
         <label for="coins">Coins</label>
         <input formControlName="coins" type="text" id="coins">

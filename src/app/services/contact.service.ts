@@ -77,7 +77,8 @@ export class ContactService {
         return {
             name: '',
             email: '',
-            phone: ''
+            phone: '',
+            coins:0,
         }
     }
 
@@ -87,6 +88,7 @@ export class ContactService {
             .pipe(
                 tap(updatedContact => {
                     const contacts = this._contacts$.value
+                    console.log('contactService:', contact)
                     this._contacts$.next(contacts.map(contact => contact._id === updatedContact._id ? updatedContact : contact))
                 }),
                 retry(1),
@@ -99,6 +101,7 @@ export class ContactService {
             .pipe(
                 tap(newContact => {
                     const contacts = this._contacts$.value
+                    console.log('contactService:', contact)
                     this._contacts$.next([...contacts, newContact])
                 }),
                 retry(1),

@@ -1,10 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { inject } from '@angular/core';
 import { ContactService } from '../../services/contact.service';
-import { Contact } from '../../models/contact.model';
+import { Contact, Transactions } from '../../models/contact.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap, map, filter, Subject, takeUntil } from 'rxjs';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms'; 
 
 
 @Component({
@@ -14,18 +14,20 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 })
 export class ContactEditPageComponent implements OnInit, OnDestroy {
   contactForm!: FormGroup;
-  private contactId: string = '';
+   contactId: string = '';
+   contactMoves?: Transactions[]=[];
+  private contactCoins: number = 0;
   private contactService = inject(ContactService)
   private router = inject(Router)
   private route = inject(ActivatedRoute)
-  private formBuilder = inject(FormBuilder)
+  private formBuilder= inject (FormBuilder )
   // contact = this.contactService.getEmptyContact()
 
   destroySubject = new Subject<void>()
   constructor(
-
-
-  ) { }
+   
+    
+  ) {}
 
 
 
@@ -35,7 +37,7 @@ export class ContactEditPageComponent implements OnInit, OnDestroy {
       email: ['', [Validators.required, Validators.email]],
       phone: ['', [Validators.required, Validators.pattern('^\\d{9,10}$')]], // Validators in an array
     });
-
+    
 
 
     this.route.params.pipe(
@@ -48,39 +50,26 @@ export class ContactEditPageComponent implements OnInit, OnDestroy {
       filter(id => id),
       switchMap(id => this.contactService.getContactById(id))
     ).subscribe((contact) => {
+      this.contactCoins=contact.coins
+      this.contactMoves=contact.moves|| []
       console.log('contact:', contact)
-      this.contactForm.patchValue(contact);
+      this.contactForm.patchValue(contact); 
     });
-
+    
   }
   ngOnDestroy(): void {
     this.destroySubject.next()
   }
   onSaveContact() {
-    this.contactService.getContactById(this.contactId).subscribe(contact => {
-      console.log('contact:', contact);
-      this.contactForm.patchValue({ coins: contact.coins });
-      console.log('contact.coins:', contact.coins)
-
-      const updatedContact: Contact = {
-        _id: this.contactId,
-        moves: contact.moves,
-        name: this.contactForm.value.name,
-        email: this.contactForm.value.email,
-        phone: this.contactForm.value.phone,
-        coins: +contact.coins,
-
-
-      };
-      // (this.contact!.moves as Transactions[]).push(transactions);
+    if (this.contactForm.valid) {
+      const updatedContact: Contact = { ...this.contactForm.value, _id: this.contactId,coins:this.contactCoins,moves:this.contactMoves }
+      console.log('updatedContact:', updatedContact)
       this.contactService.saveContact(updatedContact).subscribe({
         next: this.onBack,
         error: (err) => console.log('err:', err),
       });
-    })
+    }
   }
-
-
 
   onBack = () => {
     this.router.navigateByUrl('contact');

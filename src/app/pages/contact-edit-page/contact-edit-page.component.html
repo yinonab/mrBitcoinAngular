@@ -1,5 +1,6 @@
 <section (appClickOutside)="onBack()" class="contact-edit">
-    <h2>{{ 'Add' }} Contact</h2>
+  <h2 *ngIf="contactId; else editContact">{{ 'Edit' }} Contact</h2>
+  <ng-template #editContact><h2>{{ 'Add' }} Contact</h2></ng-template>
     <form [formGroup]="contactForm" (ngSubmit)="onSaveContact()">
       <label for="name">Name</label>
       <input formControlName="name" type="text" id="name">

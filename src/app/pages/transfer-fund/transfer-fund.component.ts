@@ -69,7 +69,7 @@ export class TransferFundComponent implements OnInit, OnDestroy {
         
         this.contactService.getContactById(this.contactId).subscribe(contact => {
           console.log('contact:', contact);
-          this.contactForm.patchValue({ coins: contact.coins });
+          // this.contactForm.patchValue({ coins: contact.coins });
           console.log('updatedCoinsd:', updatedCoins)
           console.log('contact.coins:', contact.coins)
 
