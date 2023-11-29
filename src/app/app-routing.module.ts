@@ -7,6 +7,7 @@ import { ContactDetailsPageComponent } from './pages/contact-details-page/contac
 import { ContactEditPageComponent } from './pages/contact-edit-page/contact-edit-page.component';
 import { SignupComponent } from './pages/signup/signup.component'
 import { TransferFundComponent } from './pages/transfer-fund/transfer-fund.component';
+import { WelcomeComponent } from './cmps/welcome/welcome.component';
 
 const routes: Routes = [
   {path:'details/:id',component:ContactDetailsPageComponent},
@@ -23,6 +24,7 @@ const routes: Routes = [
   
   {path:'signup',component:SignupComponent},
   {path:'home/:id',component:HomePageComponent},
+  {path:'',component:WelcomeComponent},
 ];
 
 @NgModule({
